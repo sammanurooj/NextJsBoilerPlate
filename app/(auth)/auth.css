@@ -1,0 +1,26 @@
+/* app/auth/auth.css */
+.auth-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Makes the sidebar fill the height of the layout */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scroll bars */
+}
+
+.sidebar {
+  flex: 0 0 50%; /* Set sidebar to take 50% of the width */
+  background-color: #f7f7f7; /* Light background color */
+  padding: 2rem; /* Adjusted padding for consistency */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+.form-container {
+  flex: 1; /* This will also take up the remaining space (50% in this case) */
+  padding: 2rem; /* Adds some padding */
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+  align-items: center; /* Center the form vertically */
+  background-color: #ffffff; /* Optional background color for the form container */
+  overflow: hidden; /* Prevent scroll bars in the form container */
+}
