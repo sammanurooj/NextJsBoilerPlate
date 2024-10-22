@@ -16,6 +16,7 @@ export const {
   signOut
 } = NextAuth({
   ...authConfig,
+  secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
       credentials: {},
@@ -55,7 +56,7 @@ export const {
 
       return token;
     },
-  async session({
+    async session({
       session,
       token
     }: {

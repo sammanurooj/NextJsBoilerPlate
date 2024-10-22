@@ -1,14 +1,20 @@
 import { NextAuthConfig } from 'next-auth';
 
+import GithubProvider from 'next-auth/providers/github';
+console.log(process.env.AUTH_GITHUB_ID);
+console.log(process.env.AUTH_GITHUB_SECRET);
 export const authConfig = {
   pages: {
     signIn: '/signin',
     newUser: '/signup'
   },
   providers: [
-    // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
-    // while this file is also used in non-Node.js environments
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET
+    })
   ],
+
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
