@@ -1,6 +1,5 @@
 import { NextAuthConfig } from 'next-auth';
 
-import GithubProvider from 'next-auth/providers/github';
 console.log(process.env.AUTH_GITHUB_ID);
 console.log(process.env.AUTH_GITHUB_SECRET);
 export const authConfig = {
@@ -8,13 +7,6 @@ export const authConfig = {
     signIn: '/signin',
     newUser: '/signup'
   },
-  providers: [
-    GithubProvider({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET
-    })
-  ],
-
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;

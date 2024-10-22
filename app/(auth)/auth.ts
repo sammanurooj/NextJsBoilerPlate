@@ -1,14 +1,14 @@
 import { compare } from 'bcrypt-ts';
 import NextAuth, { User, Session } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-
+import GithubProvider from 'next-auth/providers/github';
 import { getUser } from '../../actions/user';
 import { authConfig } from './auth.config';
 
 interface ExtendedSession extends Session {
   user: User & { id: string };
 }
-
+console.log(process.env.NEXTAUTH_URL);
 export const {
   handlers: { GET, POST },
   auth,
@@ -18,6 +18,10 @@ export const {
   ...authConfig,
   secret: process.env.AUTH_SECRET,
   providers: [
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET
+    }),
     Credentials({
       credentials: {},
       async authorize({
