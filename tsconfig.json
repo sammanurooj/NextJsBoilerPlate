@@ -5,6 +5,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
+     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,12 +20,10 @@
     "paths": {
       "@/*": ["./*"],
       "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"]
+      "@/lib/*": ["lib/*"],
+      "crypto": ["node_modules/crypto-js"]
     },
-    // "paths": {
-    //   "@/components/*": ["components/*"],
-    //   // "@/lib/*": ["lib/*"]
-    // },
+
     "plugins": [
       {
         "name": "next"

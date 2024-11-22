@@ -3,10 +3,6 @@ import { NextAuthConfig } from 'next-auth';
 console.log(process.env.AUTH_GITHUB_ID);
 console.log(process.env.AUTH_GITHUB_SECRET);
 export const authConfig = {
-  pages: {
-    signIn: '/signin',
-    newUser: '/signup'
-  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
@@ -19,12 +15,12 @@ export const authConfig = {
       }
 
       if (isOnRegister || isOnLogin) {
-        return true; // Always allow access to register and login pages
+        return true;
       }
 
       if (isOnChat) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        return false;
       }
 
       if (isLoggedIn) {

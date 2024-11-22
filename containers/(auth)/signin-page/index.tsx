@@ -13,18 +13,10 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
-import { FormWrapper } from '@/components/signup/form-wrapper';
-import SignupModal from '@/components/signup/signup-modal';
-import { signIn } from 'next-auth/react';
-import TermsConditionModal from '@/components/signup/termsConditionModal';
-import { Checkbox } from '@/components/ui/checkbox';
-import DropDownSearch from '@/components/common/DropDownSearch';
-import { Specialties } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
-import { FaSpinner } from 'react-icons/fa';
-import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { FaGithub, FaGoogle, FaSpinner } from 'react-icons/fa';
 import { useSignIn } from './hooks/useSignIn';
-import { FaGithub } from 'react-icons/fa';
 
 const font = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -36,7 +28,6 @@ const font = Plus_Jakarta_Sans({
 const SignInContainer = () => {
   const { form, error, successMessage, onSubmit, isPending, loading } =
     useSignIn();
-
   return (
     <>
       <Form {...form}>
@@ -112,21 +103,35 @@ const SignInContainer = () => {
           {/* GitHub Sign In Button */}
           <Button
             type="button"
-            className="flex items-center justify-center gap-2 bg-gray-800 text-white rounded-[8px] h-10 3xl:w-[462px] 3xl:h-[48px] w-full text-sm font-semibold"
-            onClick={() => signIn('github')} // Trigger GitHub sign in
+            className={cn(
+              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
+              font.className
+            )}
+            onClick={() => signIn('github', { redirectTo: '/dashboard' })}
             disabled={isPending}
           >
             <FaGithub className="mr-2" /> Sign in with GitHub
             {loading && <FaSpinner className="animate-spin ml-2" />}
           </Button>
+          <Button
+            type="button"
+            className={cn(
+              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
+              font.className
+            )}
+            onClick={() => signIn('google', { redirectTo: '/dashboard' })}
+            disabled={isPending}
+          >
+            <FaGoogle className="mr-2" /> Sign in with Google
+            {loading && <FaSpinner className="animate-spin ml-2" />}
+          </Button>
 
-          {/* Normal sign in button */}
           <Button
             type="submit"
-            className={
-              ('bg-signupPrimary rounded-[8px] h-10 3xl:w-[462px] 3xl:h-[48px] w-full text-sm font-semibold',
-              font.className)
-            }
+            className={cn(
+              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
+              font.className
+            )}
             disabled={isPending}
           >
             Sign in
