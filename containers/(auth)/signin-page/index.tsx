@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
-import { Button } from '@/components/ui/button';
 import { signIn } from 'next-auth/react';
 import { FaGithub, FaGoogle, FaSpinner } from 'react-icons/fa';
 import { useSignIn } from './hooks/useSignIn';
@@ -24,6 +23,9 @@ const font = Plus_Jakarta_Sans({
   adjustFontFallback: false,
   preload: false
 });
+
+const buttonStyles =
+  'w-full h-10 rounded-lg flex items-center justify-center gap-2 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-white'; // Added text-white here
 
 const SignInContainer = () => {
   const { form, error, successMessage, onSubmit, isPending, loading } =
@@ -39,7 +41,6 @@ const SignInContainer = () => {
             <h3 className="text-xl font-semibold dark:text-zinc-50">Sign In</h3>
           </div>
           <div className="flex flex-col gap-2 ">
-            {/* Existing email and password fields */}
             <FormField
               control={form.control}
               name="email"
@@ -101,42 +102,56 @@ const SignInContainer = () => {
           </div>
 
           {/* GitHub Sign In Button */}
-          <Button
+          <button
             type="button"
-            className={cn(
-              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
-              font.className
-            )}
+            className={`${buttonStyles} bg-black hover:bg-gray-800`}
             onClick={() => signIn('github', { redirectTo: '/dashboard' })}
             disabled={isPending}
+            style={{
+              backgroundColor: '#000000',
+              color: '#ffffff' // Added explicit white color
+            }}
           >
-            <FaGithub className="mr-2" /> Sign in with GitHub
-            {loading && <FaSpinner className="animate-spin ml-2" />}
-          </Button>
-          <Button
+            <FaGithub size={20} color="white" /> {/* Added color="white" */}
+            <span className="text-white">Sign in with GitHub</span>{' '}
+            {/* Added text-white class */}
+            {loading && <FaSpinner className="animate-spin text-white" />}{' '}
+            {/* Added text-white */}
+          </button>
+
+          {/* Google Sign In Button */}
+          <button
             type="button"
-            className={cn(
-              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
-              font.className
-            )}
+            className={`${buttonStyles} bg-black hover:bg-gray-800`}
             onClick={() => signIn('google', { redirectTo: '/dashboard' })}
             disabled={isPending}
+            style={{
+              backgroundColor: '#000000',
+              color: '#ffffff' // Added explicit white color
+            }}
           >
-            <FaGoogle className="mr-2" /> Sign in with Google
-            {loading && <FaSpinner className="animate-spin ml-2" />}
-          </Button>
+            <FaGoogle size={20} color="white" /> {/* Added color="white" */}
+            <span className="text-white">Sign in with Google</span>{' '}
+            {/* Added text-white class */}
+            {loading && <FaSpinner className="animate-spin text-white" />}{' '}
+            {/* Added text-white */}
+          </button>
 
-          <Button
+          {/* Regular Sign In Button */}
+          <button
             type="submit"
-            className={cn(
-              'bg-black hover:bg-gray-800 text-white rounded-[8px] h-10 w-full text-sm font-semibold transition-colors duration-200 3xl:w-[462px] 3xl:h-[48px]',
-              font.className
-            )}
+            className={`${buttonStyles} bg-black hover:bg-gray-800`}
             disabled={isPending}
+            style={{
+              backgroundColor: '#000000',
+              color: '#ffffff' // Added explicit white color
+            }}
           >
-            Sign in
-            {loading && <FaSpinner className="animate-spin ml-2" />}
-          </Button>
+            <span className="text-white">Sign in</span>{' '}
+            {/* Added text-white class */}
+            {loading && <FaSpinner className="animate-spin text-white" />}{' '}
+            {/* Added text-white */}
+          </button>
         </form>
       </Form>
     </>
